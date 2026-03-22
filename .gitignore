@@ -1,0 +1,10 @@
+# Folders
+src/
+
+# Notebooks
+prep.ipynb
+
+
+# Artifaacts
+python_package/vocab_*
+python_package/src_*
