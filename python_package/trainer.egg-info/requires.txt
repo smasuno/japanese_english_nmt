@@ -1,0 +1,6 @@
+sacrebleu
+tqdm
+docopt
+sentencepiece
+cloudml-hypertune
+nltk

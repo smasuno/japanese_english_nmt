@@ -19,6 +19,7 @@ setup(
     version='0.1',
     install_requires=REQUIRED_PACKAGES,
     packages=find_packages(),
+    py_modules=['run', 'download_data', 'vocab'],
     include_package_data=True,
     description='Vertex AI | Training | PyTorch | Neural Machine Translation with RNN | Python Package'
 )

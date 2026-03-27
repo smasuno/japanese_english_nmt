@@ -39,6 +39,7 @@ Options:
     --max-decoding-time-step=<int>          maximum number of decoding time steps [default: 70]
     --vocab-size-src=<int>                  vocab size of source language [default: 21000]
     --src-vocab-model=<file>                filename of source vocab model
+    --hyper-tune=<str>                      enable hyperparameter tuning mode [default: n]
 """
 import math
 import sys
@@ -56,6 +57,7 @@ from typing import List, Tuple, Dict, Set, Union
 from tqdm import tqdm
 from trainer import read_corpus, batch_iter, download_data_from_gcs, upload_to_gcs
 from vocab import Vocab, VocabEntry
+import hypertune
 
 import torch
 import torch.nn.utils
@@ -115,6 +117,9 @@ def train(args: Dict):
     """ Train the NMT Model.
     @param args (Dict): args from cmd line
     """
+    if args['--hyper-tune'] == 'y':
+        import download_data  # runs GCS downloads at import time
+
     vocab_size = int(args['--vocab-size-src'])
     vocab_model = args['--src-vocab-model']
     
@@ -240,6 +245,15 @@ def train(args: Dict):
                 valid_metric = -dev_ppl
 
                 print('validation: iter %d, dev. ppl %f' % (train_iter, dev_ppl), file=sys.stderr)
+
+                if args['--hyper-tune'] == 'y':
+                    import hypertune
+                    hpt = hypertune.HyperTune()
+                    hpt.report_hyperparameter_tuning_metric(
+                        hyperparameter_metric_tag='dev_ppl',
+                        metric_value=dev_ppl,
+                        global_step=train_iter
+                    )
 
                 is_better = len(hist_valid_scores) == 0 or valid_metric > max(hist_valid_scores)
                 hist_valid_scores.append(valid_metric)
@@ -379,13 +393,7 @@ def main():
     #except:
     #    pass
     
-    #download_data_from_gcs("gs://japanese_english_nmt/dev.en", f"{os.getcwd()}/data/dev.en")
-    #download_data_from_gcs("gs://japanese_english_nmt/dev.ja", f"{os.getcwd()}/data/dev.ja")
-    #download_data_from_gcs("gs://japanese_english_nmt/train.en", f"{os.getcwd()}/data/train.en")
-    #download_data_from_gcs("gs://japanese_english_nmt/train.ja", f"{os.getcwd()}/data/train.ja")
-    #download_data_from_gcs("gs://japanese_english_nmt/test.en", f"{os.getcwd()}/data/test.en")
-    #download_data_from_gcs("gs://japanese_english_nmt/test.ja", f"{os.getcwd()}/data/test.ja")
-    
+
     if args['train']:
         train(args)
     elif args['decode']:

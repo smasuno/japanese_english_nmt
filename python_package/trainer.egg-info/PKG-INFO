@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: trainer
+Version: 0.1
+Summary: Vertex AI | Training | PyTorch | Neural Machine Translation with RNN | Python Package
+Requires-Dist: sacrebleu
+Requires-Dist: tqdm
+Requires-Dist: docopt
+Requires-Dist: sentencepiece
+Requires-Dist: cloudml-hypertune
+Requires-Dist: nltk

@@ -18,19 +18,13 @@ try:
 except:
     pass
 
-#download_data_from_gcs("gs://japanese_english_nmt/dev.en", f"{os.getcwd()}/data/dev.en")
-#download_data_from_gcs("gs://japanese_english_nmt/dev.ja", f"{os.getcwd()}/data/dev.ja")
-#download_data_from_gcs("gs://japanese_english_nmt/train.en", f"{os.getcwd()}/data/train.en")
-#download_data_from_gcs("gs://japanese_english_nmt/train.ja", f"{os.getcwd()}/data/train.ja")
-#download_data_from_gcs("gs://japanese_english_nmt/test.en", f"{os.getcwd()}/data/test.en")
-#download_data_from_gcs("gs://japanese_english_nmt/test.ja", f"{os.getcwd()}/data/test.ja")
-
 download_data_from_gcs("gs://japanese_english_nmt/dev.en", "/tmp/data/dev.en")
 download_data_from_gcs("gs://japanese_english_nmt/dev.ja", "/tmp/data/dev.ja")
 download_data_from_gcs("gs://japanese_english_nmt/train.en", "/tmp/data/train.en")
 download_data_from_gcs("gs://japanese_english_nmt/train.ja", "/tmp/data/train.ja")
 download_data_from_gcs("gs://japanese_english_nmt/test.en", "/tmp/data/test.en")
 download_data_from_gcs("gs://japanese_english_nmt/test.ja", "/tmp/data/test.ja")
+
 
 
 # print(f"Data downloaded to: {os.getcwd()}/data/")

@@ -1,0 +1,15 @@
+README.md
+download_data.py
+run.py
+setup.py
+vocab.py
+trainer/__init__.py
+trainer/model_embeddings.py
+trainer/nmt_model.py
+trainer/task.py
+trainer/utils.py
+trainer.egg-info/PKG-INFO
+trainer.egg-info/SOURCES.txt
+trainer.egg-info/dependency_links.txt
+trainer.egg-info/requires.txt
+trainer.egg-info/top_level.txt
