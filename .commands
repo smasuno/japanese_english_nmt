@@ -1,0 +1,7 @@
+# Commands to run in bash to submit the jobs
+
+# Hyperparameter tuning
+  gcloud ai hp-tuning-jobs create \
+    --region=us-west1 \
+    --display-name=nmt_tuning \
+    --config=hptuning_job.yaml

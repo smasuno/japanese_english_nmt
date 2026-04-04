@@ -39,6 +39,7 @@ Options:
     --max-decoding-time-step=<int>          maximum number of decoding time steps [default: 70]
     --vocab-size-src=<int>                  vocab size of source language [default: 21000]
     --src-vocab-model=<file>                filename of source vocab model
+    --tgt-vocab-model=<file>                filename of target vocab model
     --hyper-tune=<str>                      enable hyperparameter tuning mode [default: n]
 """
 import math
@@ -311,11 +312,15 @@ def decode(args: Dict[str, str]):
     @param args (Dict): args from cmd line
     """
 
+    vocab_size = int(args['--vocab-size-src'])
+    src_vocab_model = args['--src-vocab-model']
+    tgt_vocab_model = args['--tgt-vocab-model']
+
     print("load test source sentences from [{}]".format(args['TEST_SOURCE_FILE']), file=sys.stderr)
-    test_data_src = read_corpus(args['TEST_SOURCE_FILE'], source='src', vocab_size=3000)
+    test_data_src = read_corpus(args['TEST_SOURCE_FILE'], source=src_vocab_model, vocab_size=3000)
     if args['TEST_TARGET_FILE']:
         print("load test target sentences from [{}]".format(args['TEST_TARGET_FILE']), file=sys.stderr)
-        test_data_tgt = read_corpus(args['TEST_TARGET_FILE'], source='tgt', vocab_size=2000)
+        test_data_tgt = read_corpus(args['TEST_TARGET_FILE'], source=tgt_vocab_model, vocab_size=2000)
 
     print("load model from {}".format(args['MODEL_PATH']), file=sys.stderr)
     model = NMT.load(args['MODEL_PATH'])

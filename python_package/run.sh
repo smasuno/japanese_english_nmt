@@ -27,9 +27,9 @@ CUDA_VISIBLE_DEVICES=0 python run.py train \
     --train-tgt=/tmp/data/train.en \
     --dev-src=/tmp/data/dev.ja \
     --dev-tgt=/tmp/data/dev.en \
-    --vocab=vocab_50k.json \
-    --vocab-size-src=50000 \
-    --src-vocab-model="src_50k" \
+    --vocab=vocab_40k.json \
+    --vocab-size-src=40000 \
+    --src-vocab-model="src_40k" \
     $ARG_COMPILE $ARG_BACKEND \
     --gpu --lr=5e-4 --patience=1 \
     --valid-niter=200 --batch-size=32 --dropout=.3
